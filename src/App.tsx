@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
 import {Header} from "./components/ui/Header"
+import {MovieCards} from "./components/ui/MovieCards"
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Header />
+      <MovieCards />
     </div>
   );
 }

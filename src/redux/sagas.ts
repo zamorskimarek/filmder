@@ -19,8 +19,6 @@ function* fetchMovies(): Generator<any, any, AxiosResponse> {
       axios.get,
       "http://api.movis.com/recommendations"
     );
-    console.log(response, "res");
-
     yield put(fetchMoviesSuccess(response.data));
   } catch (error) {
     yield put(fetchMoviesFailure(error));

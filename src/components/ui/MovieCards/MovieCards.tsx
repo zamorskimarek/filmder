@@ -5,7 +5,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
 import {Movie} from '../../../../types/movies';
-import {RootState} from '../../../redux/store'
+import {RootState} from '../../../redux/store';
 import {fetchMoviesRequest} from '../../../redux/actions';
 import {Button} from '../Button';
 import {CircularProgress} from '@mui/material';
@@ -25,6 +25,7 @@ export const MovieCards = () => {
   const loading = useSelector((state: RootState) => state.moviesState.loading);
   const [currentIndex, setCurrentIndex] = useState(movies.length - 1);
   const [currentId, setCurrentId] = useState('');
+  const [leftCards, setLeftCards] = useState<number[]>([]);
 
   useEffect(() => {
     setCurrentIndex(movies.length - 1);
@@ -79,8 +80,11 @@ export const MovieCards = () => {
     mock.onPut(`http://api.movis.com/recommendations/${id}/accept`).reply(200);
     axios
       .put(`http://api.movis.com/recommendations/${id}/accept`)
-      .then(res => `movie with id ${currentId} accepted, status: ${res.status}`,)
+      .then(res => `movie with id ${currentId} accepted, status: ${res.status}`)
       .catch(err => console.log(err));
+  };
+  const outOfFrame = (idx: number) => {
+    setLeftCards(leftCards => [...leftCards, idx]);
   };
 
   return (
@@ -110,26 +114,33 @@ export const MovieCards = () => {
           ) : (
             <>
               <div className="cardContainer">
-                {movies.map((movie: Movie, index: number) => (
-                  <TinderCard
-                    ref={childRefs[index]}
-                    className="swipe"
-                    key={movie.title}
-                    onSwipe={dir => swiped(dir, movie.id, index)}
-                    preventSwipe={['down']}>
-                    <div
-                      style={{backgroundImage: `url(${movie.imageURL})`}}
-                      className="card">
-                      <div className="card__textContainer">
-                        <p className="card__title">{movie.title}</p>
-                        <p className="card__title">
-                          IMDB Rating: {movie.rating}
-                        </p>
-                        <p className="card__summary">{movie.summary}</p>
+                {movies.map((movie: Movie, index: number) => {
+                  if (leftCards.includes(index)) {
+                    return null;
+                  }
+                  return (
+                    <TinderCard
+                      ref={childRefs[index]}
+                      className="swipe"
+                      key={movie.title}
+                      onSwipe={dir => swiped(dir, movie.id, index)}
+                      onCardLeftScreen={() => outOfFrame(index)}
+                      // preventSwipe={['down']}
+                    >
+                      <div
+                        style={{backgroundImage: `url(${movie.imageURL})`}}
+                        className="card">
+                        <div className="card__textContainer">
+                          <p className="card__title">{movie.title}</p>
+                          <p className="card__title">
+                            IMDB Rating: {movie.rating}
+                          </p>
+                          <p className="card__summary">{movie.summary}</p>
+                        </div>
                       </div>
-                    </div>
-                  </TinderCard>
-                ))}
+                    </TinderCard>
+                  );
+                })}
               </div>
               <div className="buttonsContainer">
                 <div onClick={() => handleAccept(currentId)}>

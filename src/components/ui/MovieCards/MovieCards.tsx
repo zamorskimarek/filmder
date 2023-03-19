@@ -55,7 +55,9 @@ export const MovieCards = () => {
         .reply(200);
       axios
         .put(`http://api.movis.com/recommendations/${id}/reject`)
-        .then(() => setDecisionText('Movie rejected'))
+        .then(() =>
+          setDecisionText(`Movie ${movies[currentIndex].title} rejected`),
+        )
         .catch(err => console.log(err));
     }
   };
@@ -77,7 +79,9 @@ export const MovieCards = () => {
     mock.onPut(`http://api.movis.com/recommendations/${id}/accept`).reply(200);
     axios
       .put(`http://api.movis.com/recommendations/${id}/accept`)
-      .then(() => setDecisionText('Movie accepted'))
+      .then(() =>
+        setDecisionText(`Movie ${movies[currentIndex].title} accepted`),
+      )
       .catch(err => console.log(err));
   };
   const outOfFrame = (idx: number) => {
@@ -98,17 +102,20 @@ export const MovieCards = () => {
       ) : (
         <>
           {!canSwipe ? (
-            <div
-              className="cardContainer"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <p className="decisionText">no more movies</p>
-              <p className="decisionText">try again later :)</p>
-            </div>
+            <>
+              <div
+                className="cardContainer"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <p className="decisionText">no more movies</p>
+                <p className="decisionText">try again later :)</p>
+              </div>
+              <p className="decisionText">{decisionText}</p>
+            </>
           ) : (
             <>
               <div className="cardContainer">
@@ -122,9 +129,7 @@ export const MovieCards = () => {
                       className="swipe"
                       key={movie.title}
                       onSwipe={dir => swiped(dir, movie.id, index)}
-                      onCardLeftScreen={() => outOfFrame(index)}
-                      // preventSwipe={['down']}
-                    >
+                      onCardLeftScreen={() => outOfFrame(index)}>
                       <div
                         style={{backgroundImage: `url(${movie.imageURL})`}}
                         className="card">

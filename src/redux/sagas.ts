@@ -1,4 +1,4 @@
-import {call, put, takeLatest} from 'redux-saga/effects';
+import {call, CallEffect, put, PutEffect, takeLatest} from 'redux-saga/effects';
 import axios, {type AxiosResponse} from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import {recommendations} from '../recommendations/recommendations';
@@ -8,8 +8,15 @@ import {
   fetchMoviesSuccess,
   fetchMoviesFailure,
 } from './actions';
+import {Movie} from '../../types/movies';
 
-export function* fetchMovies(): Generator<any, any, AxiosResponse> {
+export function* fetchMovies(): Generator<
+  | CallEffect<unknown>
+  | PutEffect<{type: string; payload: Movie[]}>
+  | PutEffect<{type: string; payload: unknown}>,
+  void,
+  AxiosResponse
+> {
   try {
     const mock = new MockAdapter(axios);
     mock

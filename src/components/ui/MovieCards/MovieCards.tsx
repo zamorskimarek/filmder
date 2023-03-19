@@ -1,16 +1,15 @@
 import React, {useEffect, useRef, useState, useMemo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import TinderCard from 'react-tinder-card';
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
 
 import {Movie} from '../../../../types/movies';
-import {RootState} from '../../../redux/store';
 import {fetchMoviesRequest} from '../../../redux/actions';
 import {Button} from '../Button';
 import {CircularProgress} from '@mui/material';
 
 import './MovieCards.css';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 
 export const MovieCards = () => {
   const dispatch = useDispatch();
@@ -21,11 +20,12 @@ export const MovieCards = () => {
     }, 1000);
   }, [dispatch]);
 
-  const movies = useSelector((state: RootState) => state.moviesState.movies);
-  const loading = useSelector((state: RootState) => state.moviesState.loading);
+  const movies = useSelector((state: any) => state.moviesState.movies);
+  const loading = useSelector((state: any) => state.moviesState.loading);
   const [currentIndex, setCurrentIndex] = useState(movies.length - 1);
   const [currentId, setCurrentId] = useState('');
   const [leftCards, setLeftCards] = useState<number[]>([]);
+
 
   useEffect(() => {
     setCurrentIndex(movies.length - 1);
@@ -80,13 +80,12 @@ export const MovieCards = () => {
     mock.onPut(`http://api.movis.com/recommendations/${id}/accept`).reply(200);
     axios
       .put(`http://api.movis.com/recommendations/${id}/accept`)
-      .then(res => `movie with id ${currentId} accepted, status: ${res.status}`)
+      .then(res => console.log(`movie with id ${currentId} accepted`))
       .catch(err => console.log(err));
   };
   const outOfFrame = (idx: number) => {
     setLeftCards(leftCards => [...leftCards, idx]);
   };
-
   return (
     <section className="cardSection">
       {loading ? (
@@ -114,7 +113,7 @@ export const MovieCards = () => {
           ) : (
             <>
               <div className="cardContainer">
-                {movies.map((movie: Movie, index: number) => {
+              {movies.map((movie: Movie, index: number) => {
                   if (leftCards.includes(index)) {
                     return null;
                   }

@@ -5,6 +5,8 @@ import {all} from 'redux-saga/effects';
 import moviesReducer from './movieReducer';
 import watchFetchMovies from './sagas';
 
+export type RootState = ReturnType<typeof store.getState>
+
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({

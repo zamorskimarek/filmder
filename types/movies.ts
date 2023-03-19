@@ -11,3 +11,13 @@ export interface MoviesState {
   loading: boolean;
   error: string | null;
 }
+
+export interface GlobalState {
+  state: {
+    moviesState: {
+      movies: Movie[];
+      loading: boolean;
+      error: string | null;
+    };
+  };
+}

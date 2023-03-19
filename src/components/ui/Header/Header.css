@@ -11,12 +11,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 .header__title {
   animation: background-pan 1.5s linear infinite;
-  font-size: 5rem;
+  font-size: 4rem;
   background: linear-gradient(to right, #fd3546, #810303, #fd3546);
   background-size: 200%;
   background-clip: text;

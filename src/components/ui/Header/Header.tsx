@@ -4,7 +4,7 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import TheatersIcon from '@mui/icons-material/Theaters';
 
 const systemOverwriteIcon = {
-  fontSize: '5rem',
+  fontSize: '4rem',
   fill: 'url(#linearColors)',
 };
 

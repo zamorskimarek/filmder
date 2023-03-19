@@ -60,5 +60,22 @@
   justify-content: space-between;
   width: 90vw;
   max-width: 400px;
-  margin: 5rem 0;
+  margin: 4rem 0;
+}
+
+@media (max-width: 450px) {
+  .cardSection {
+    margin: 2rem 0;
+    justify-content: flex-start;
+  }
+  .cardContainer {
+    width: 80vw;
+  }
+  .card {
+    width: 80vw;
+  }
+  .buttonsContainer {
+    width: 80vw;
+    margin: 1rem 0;
+  }
 }

@@ -1,8 +1,8 @@
+import { AxiosRequestConfig } from 'axios';
 import {type Movie} from '../../types/movies';
 export const FETCH_MOVIES_REQUEST = 'FETCH_MOVIES_REQUEST';
 export const FETCH_MOVIES_SUCCESS = 'FETCH_MOVIES_SUCCESS';
 export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';
-export const PUT_MOVIES_ACCEPT = 'PUT_MOVIES_ACCEPT';
 
 interface AxiosGetError {
   message: string;
@@ -12,8 +12,8 @@ interface AxiosGetError {
       message: string;
     };
   };
-  request?: any;
-  config?: any;
+  request?: XMLHttpRequest;
+  config?: AxiosRequestConfig;
   isAxiosError: boolean;
   toJSON: () => object;
 }
@@ -24,11 +24,6 @@ export const fetchMoviesRequest = () => ({
 
 export const fetchMoviesSuccess = (movies: Movie[]) => ({
   type: FETCH_MOVIES_SUCCESS,
-  payload: movies,
-});
-
-export const putMoviesAccept = (movies: Movie[]) => ({
-  type: PUT_MOVIES_ACCEPT,
   payload: movies,
 });
 

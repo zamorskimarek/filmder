@@ -1,15 +1,16 @@
 import React, {useEffect, useRef, useState, useMemo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import TinderCard from 'react-tinder-card';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 
 import {Movie} from '../../../../types/movies';
+import {RootState} from '../../../redux/store'
 import {fetchMoviesRequest} from '../../../redux/actions';
 import {Button} from '../Button';
 import {CircularProgress} from '@mui/material';
 
 import './MovieCards.css';
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
 
 export const MovieCards = () => {
   const dispatch = useDispatch();
@@ -20,8 +21,8 @@ export const MovieCards = () => {
     }, 1000);
   }, [dispatch]);
 
-  const movies = useSelector((state: any) => state.moviesState.movies);
-  const loading = useSelector((state: any) => state.moviesState.loading);
+  const movies = useSelector((state: RootState) => state.moviesState.movies);
+  const loading = useSelector((state: RootState) => state.moviesState.loading);
   const [currentIndex, setCurrentIndex] = useState(movies.length - 1);
   const [currentId, setCurrentId] = useState('');
 
@@ -78,7 +79,7 @@ export const MovieCards = () => {
     mock.onPut(`http://api.movis.com/recommendations/${id}/accept`).reply(200);
     axios
       .put(`http://api.movis.com/recommendations/${id}/accept`)
-      .then(res => console.log(`movie with id ${currentId} accepted`))
+      .then(res => `movie with id ${currentId} accepted, status: ${res.status}`,)
       .catch(err => console.log(err));
   };
 

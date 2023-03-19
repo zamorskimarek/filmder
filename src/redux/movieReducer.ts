@@ -1,5 +1,5 @@
-import { MoviesState } from "../../types/movies";
-import { FETCH_MOVIES_SUCCESS, FETCH_MOVIES_FAILURE } from "./actions";
+import {type MoviesState} from '../../types/movies';
+import {FETCH_MOVIES_SUCCESS, FETCH_MOVIES_FAILURE} from './actions';
 
 const initialState: MoviesState = {
   movies: [],

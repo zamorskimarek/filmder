@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import TinderCard from "react-tinder-card";
+import React, {useEffect, useRef, useState, useMemo} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import TinderCard from 'react-tinder-card';
 
-import { Movie } from "../../../../types/movies";
-import { fetchMoviesRequest } from "../../../redux/actions";
-import { Button } from "../Button";
-import { CircularProgress } from "@mui/material";
+import {Movie} from '../../../../types/movies';
+import {fetchMoviesRequest} from '../../../redux/actions';
+import {Button} from '../Button';
+import {CircularProgress} from '@mui/material';
 
-import "./MovieCards.css";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
+import './MovieCards.css';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 
 export const MovieCards = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export const MovieCards = () => {
   const movies = useSelector((state: any) => state.moviesState.movies);
   const loading = useSelector((state: any) => state.moviesState.loading);
   const [currentIndex, setCurrentIndex] = useState(movies.length - 1);
-  const [currentId, setCurrentId] = useState("");
+  const [currentId, setCurrentId] = useState('');
 
   useEffect(() => {
     setCurrentIndex(movies.length - 1);
@@ -34,8 +34,8 @@ export const MovieCards = () => {
     () =>
       Array(movies.length)
         .fill(0)
-        .map((i) => React.createRef()),
-    [movies.length]
+        .map(() => React.createRef()),
+    [movies.length],
   );
 
   const updateCurrentIndex = (val: number) => {
@@ -45,19 +45,19 @@ export const MovieCards = () => {
   const canSwipe = currentIndex >= 0;
   const swiped = (direction: string, id: string, index: number) => {
     updateCurrentIndex(index - 1);
-    if (direction !== "down" && id === currentId) {
+    if (direction !== 'down' && id === currentId) {
       const mock = new MockAdapter(axios);
       mock
         .onPut(`http://api.movis.com/recommendations/${id}/reject`)
         .reply(200);
       axios
         .put(`http://api.movis.com/recommendations/${id}/reject`)
-        .then((res) =>
+        .then(res =>
           console.log(
-            `movie with id ${currentId} rejected, status: ${res.status}`
-          )
+            `movie with id ${currentId} rejected, status: ${res.status}`,
+          ),
         )
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err));
     }
   };
   const swipe = async (dir: string) => {
@@ -73,13 +73,13 @@ export const MovieCards = () => {
   }, [currentIndex, movies, loading]);
 
   const handleAccept = (id: string) => {
-    swipe("down");
+    swipe('down');
     const mock = new MockAdapter(axios);
     mock.onPut(`http://api.movis.com/recommendations/${id}/accept`).reply(200);
     axios
       .put(`http://api.movis.com/recommendations/${id}/accept`)
-      .then((res) => console.log(`movie with id ${currentId} accepted`))
-      .catch((err) => console.log(err));
+      .then(res => console.log(`movie with id ${currentId} accepted`))
+      .catch(err => console.log(err));
   };
 
   return (
@@ -88,11 +88,10 @@ export const MovieCards = () => {
         <div
           className="cardContainer"
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
           <CircularProgress />
         </div>
       ) : (
@@ -101,11 +100,10 @@ export const MovieCards = () => {
             <div
               className="cardContainer"
               style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
               <p>no more movies</p>
             </div>
           ) : (
@@ -116,16 +114,16 @@ export const MovieCards = () => {
                     ref={childRefs[index]}
                     className="swipe"
                     key={movie.title}
-                    onSwipe={(dir) => swiped(dir, movie.id, index)}
-                    preventSwipe={["down"]}
-                  >
+                    onSwipe={dir => swiped(dir, movie.id, index)}
+                    preventSwipe={['down']}>
                     <div
-                      style={{ backgroundImage: `url(${movie.imageURL})` }}
-                      className="card"
-                    >
+                      style={{backgroundImage: `url(${movie.imageURL})`}}
+                      className="card">
                       <div className="card__textContainer">
                         <p className="card__title">{movie.title}</p>
-                        <p className="card__title">IMDB Rating: {movie.rating}</p>
+                        <p className="card__title">
+                          IMDB Rating: {movie.rating}
+                        </p>
                         <p className="card__summary">{movie.summary}</p>
                       </div>
                     </div>
@@ -136,7 +134,7 @@ export const MovieCards = () => {
                 <div onClick={() => handleAccept(currentId)}>
                   <Button variant="accept" />
                 </div>
-                <div onClick={() => swipe("right")}>
+                <div onClick={() => swipe('right')}>
                   <Button variant="reject" />
                 </div>
               </div>

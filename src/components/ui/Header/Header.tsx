@@ -1,11 +1,11 @@
-import React from "react";
-import "./Header.css";
-import WhatshotIcon from "@mui/icons-material/Whatshot";
-import TheatersIcon from "@mui/icons-material/Theaters";
+import React from 'react';
+import './Header.css';
+import WhatshotIcon from '@mui/icons-material/Whatshot';
+import TheatersIcon from '@mui/icons-material/Theaters';
 
 const systemOverwriteIcon = {
-  fontSize: "5rem",
-  fill: "url(#linearColors)",
+  fontSize: '5rem',
+  fill: 'url(#linearColors)',
 };
 
 export const Header = () => {

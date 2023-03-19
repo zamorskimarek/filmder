@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/ui/Header"
-import {MovieCards} from "./components/ui/MovieCards"
+import {Header} from './components/ui/Header';
+import {MovieCards} from './components/ui/MovieCards';
 
 function App() {
   return (

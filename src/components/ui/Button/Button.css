@@ -10,14 +10,11 @@
 }
 
 .buttonContainer:active {
-    transform: scale(0.97);
-    box-shadow: none;
-  }
-
+  transform: scale(0.97);
+  box-shadow: none;
+}
 
 .button {
   font-size: 2rem;
-  margin-inline: .5rem;
+  margin-inline: 0.5rem;
 }
-
-

@@ -1,9 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import { all } from 'redux-saga/effects';
+import {all} from 'redux-saga/effects';
 
-import  moviesReducer  from './movieReducer';
-import  watchFetchMovies  from './sagas';
+import moviesReducer from './movieReducer';
+import watchFetchMovies from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 

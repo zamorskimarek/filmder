@@ -1,3 +1,3 @@
-import { MovieCards } from "./MovieCards";
+import {MovieCards} from './MovieCards';
 
-export { MovieCards };
+export {MovieCards};

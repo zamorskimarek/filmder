@@ -10,6 +10,7 @@ import {CircularProgress} from '@mui/material';
 import './MovieCards.css';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import {RootState} from '../../../redux/store';
 
 export const MovieCards = () => {
   const dispatch = useDispatch();
@@ -20,12 +21,12 @@ export const MovieCards = () => {
     }, 1000);
   }, [dispatch]);
 
-  const movies = useSelector((state: any) => state.moviesState.movies);
-  const loading = useSelector((state: any) => state.moviesState.loading);
+  const movies = useSelector((state: RootState) => state.moviesState.movies);
+  const loading = useSelector((state: RootState) => state.moviesState.loading);
   const [currentIndex, setCurrentIndex] = useState(movies.length - 1);
   const [currentId, setCurrentId] = useState('');
   const [leftCards, setLeftCards] = useState<number[]>([]);
-
+  const [decisionText, setDecisionText] = useState('');
 
   useEffect(() => {
     setCurrentIndex(movies.length - 1);
@@ -54,11 +55,7 @@ export const MovieCards = () => {
         .reply(200);
       axios
         .put(`http://api.movis.com/recommendations/${id}/reject`)
-        .then(res =>
-          console.log(
-            `movie with id ${currentId} rejected, status: ${res.status}`,
-          ),
-        )
+        .then(() => setDecisionText('Movie rejected'))
         .catch(err => console.log(err));
     }
   };
@@ -80,7 +77,7 @@ export const MovieCards = () => {
     mock.onPut(`http://api.movis.com/recommendations/${id}/accept`).reply(200);
     axios
       .put(`http://api.movis.com/recommendations/${id}/accept`)
-      .then(res => console.log(`movie with id ${currentId} accepted`))
+      .then(() => setDecisionText('Movie accepted'))
       .catch(err => console.log(err));
   };
   const outOfFrame = (idx: number) => {
@@ -105,15 +102,17 @@ export const MovieCards = () => {
               className="cardContainer"
               style={{
                 display: 'flex',
+                flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <p>no more movies</p>
+              <p className="decisionText">no more movies</p>
+              <p className="decisionText">try again later :)</p>
             </div>
           ) : (
             <>
               <div className="cardContainer">
-              {movies.map((movie: Movie, index: number) => {
+                {movies.map((movie: Movie, index: number) => {
                   if (leftCards.includes(index)) {
                     return null;
                   }
@@ -141,6 +140,7 @@ export const MovieCards = () => {
                   );
                 })}
               </div>
+              <p className="decisionText">{decisionText}</p>
               <div className="buttonsContainer">
                 <div onClick={() => handleAccept(currentId)}>
                   <Button variant="accept" />

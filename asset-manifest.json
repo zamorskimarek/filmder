@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/filmder/static/css/main.73beaa81.css",
-    "main.js": "/filmder/static/js/main.bb1f45ef.js",
+    "main.css": "/filmder/static/css/main.75a8c405.css",
+    "main.js": "/filmder/static/js/main.c1c662de.js",
     "static/media/axios.cjs": "/filmder/static/media/axios.33cfa09f5297bf2e21f8.cjs",
     "index.html": "/filmder/index.html",
-    "main.73beaa81.css.map": "/filmder/static/css/main.73beaa81.css.map",
-    "main.bb1f45ef.js.map": "/filmder/static/js/main.bb1f45ef.js.map"
+    "main.75a8c405.css.map": "/filmder/static/css/main.75a8c405.css.map",
+    "main.c1c662de.js.map": "/filmder/static/js/main.c1c662de.js.map"
   },
   "entrypoints": [
-    "static/css/main.73beaa81.css",
-    "static/js/main.bb1f45ef.js"
+    "static/css/main.75a8c405.css",
+    "static/js/main.c1c662de.js"
   ]
 }

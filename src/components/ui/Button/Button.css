@@ -1,0 +1,23 @@
+.buttonContainer {
+  background-color: rgb(13, 136, 60);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  color: white;
+  border-radius: 2rem;
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+.buttonContainer:active {
+    transform: scale(0.97);
+    box-shadow: none;
+  }
+
+
+.button {
+  font-size: 2rem;
+  margin-inline: .5rem;
+}
+
+

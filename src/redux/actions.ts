@@ -2,7 +2,8 @@ import { Movie } from "../../types/movies";
 export const FETCH_MOVIES_REQUEST = "FETCH_MOVIES_REQUEST";
 export const FETCH_MOVIES_SUCCESS = "FETCH_MOVIES_SUCCESS";
 export const FETCH_MOVIES_FAILURE = "FETCH_MOVIES_FAILURE";
-export const FETCH_MOVIES_API_CALL = "FETCH_MOVIES_API_CALL";
+export const PUT_MOVIES_ACCEPT = "PUT_MOVIES_ACCEPT";
+// export const FETCH_MOVIES_API_CALL = "FETCH_MOVIES_API_CALL";
 
 interface AxiosGetError {
     message: string;
@@ -18,9 +19,9 @@ interface AxiosGetError {
     toJSON: () => object;
   }
 
-export const fetchMoviesApiCall = () => ({
-  type: FETCH_MOVIES_API_CALL,
-});
+// export const fetchMoviesApiCall = () => ({
+//   type: FETCH_MOVIES_API_CALL,
+// });
 
 export const fetchMoviesRequest = () => ({
   type: FETCH_MOVIES_REQUEST,
@@ -28,6 +29,11 @@ export const fetchMoviesRequest = () => ({
 
 export const fetchMoviesSuccess = (movies: Movie[]) => ({
   type: FETCH_MOVIES_SUCCESS,
+  payload: movies,
+});
+
+export const putMoviesAccept = (movies: Movie[]) => ({
+  type: PUT_MOVIES_ACCEPT,
   payload: movies,
 });
 

@@ -3,7 +3,7 @@ import { FETCH_MOVIES_SUCCESS, FETCH_MOVIES_FAILURE } from "./actions";
 
 const initialState: MoviesState = {
   movies: [],
-  loading: false,
+  loading: true,
   error: null,
 };
 
@@ -13,7 +13,7 @@ const moviesReducer = (state = initialState, action: any): MoviesState => {
       return {
         ...state,
         movies: action.payload,
-        loading: true,
+        loading: false,
         error: null,
       };
     case FETCH_MOVIES_FAILURE:

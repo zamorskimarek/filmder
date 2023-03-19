@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import axios, { AxiosResponse } from "axios";
 import MockAdapter from "axios-mock-adapter";
-import { recommendations } from "../components/ui/Header/recommendations";
+import { recommendations } from "../recommendations/recommendations";
 
 import {
   FETCH_MOVIES_REQUEST,
@@ -9,7 +9,8 @@ import {
   fetchMoviesFailure,
 } from "./actions";
 
-function* fetchMovies(): Generator<any, any, AxiosResponse> {
+
+export function* fetchMovies(): Generator<any, any, AxiosResponse> {
   try {
     const mock = new MockAdapter(axios);
     mock

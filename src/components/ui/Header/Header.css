@@ -1,14 +1,30 @@
+@keyframes background-pan {
+  from {
+    background-position: 0% center;
+  }
+  to {
+    background-position: 200% center;
+  }
+}
+
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2rem;
 }
 
 .header__title {
+  animation: background-pan 1.5s linear infinite;
   font-size: 5rem;
+  background: linear-gradient(to right, #fd3546, #810303, #fd3546);
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .header__icons {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
